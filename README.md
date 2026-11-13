@@ -3,31 +3,15 @@
 **Sinh viên:** Nguyễn Hải Đăng  
 **MSSV:** 202418863
 
-Bài tập mô phỏng nhà thông minh. Phần code hiện làm một phần nhỏ: abstraction thiết bị, ba loại thiết bị và Factory. UML có phác thảo thêm Singleton và Facade để làm định hướng; hai phần đó chưa được cài đặt.
+Chương trình Python mô phỏng một số thiết bị trong nhà thông minh: đèn, quạt và cửa. Bài tập minh họa cách tạo thiết bị bằng Factory và dùng một cấu hình chung bằng Singleton.
 
-## Chạy chương trình
+## Chức năng
 
-Yêu cầu Python 3.10 trở lên, không cần cài thư viện ngoài.
-
-```bash
-python main.py
-```
-
-Chạy kiểm tra các tình huống chính:
-
-```bash
-python -m unittest discover -s tests -v
-```
-
-Kết quả hiện tại: **2 kiểm tra đạt** cho Factory.
-
-Mã nguồn: [GitHub - Week-10](https://github.com/dangdoaimo2006-cloud/Week-10).
-
-## Các pattern
-
-- **Đã viết - Factory**: `src/device_factory.py` tạo thiết bị theo tên loại.
-- **Có trong UML, chưa code - Singleton**: cấu hình dùng chung.
-- **Có trong UML, chưa code - Facade**: gom thao tác thiết bị thành chế độ Đi làm/Đi ngủ.
+- Bật/tắt đèn và quạt.
+- Khóa/mở khóa cửa.
+- Tạo thiết bị theo loại `light`, `fan` hoặc `door`.
+- Lấy cấu hình nhà với cùng một đối tượng `HomeConfiguration`.
+- Sơ đồ UML mô tả thêm cách tổ chức các thao tác nhà thông minh bằng Facade.
 
 ## Cấu trúc
 
@@ -38,24 +22,35 @@ week10/
 ├── docs/
 │   └── analysis-and-design.md
 ├── src/
-│   ├── __init__.py
 │   ├── devices.py
-│   └── device_factory.py
+│   ├── device_factory.py
+│   └── home_configuration.py
 └── tests/
     └── test_devices.py
 ```
 
-## UML
+## Chạy chương trình
 
-Sơ đồ lớp và trách nhiệm từng lớp nằm tại [`docs/analysis-and-design.md`](docs/analysis-and-design.md).
+Yêu cầu Python 3.10 trở lên, không cần cài thêm thư viện.
 
-## Ghi chú thiết kế
+```bash
+python main.py
+```
 
-- Factory che giấu quyết định chọn lớp cụ thể và chuẩn hóa việc tạo đối tượng. Khi thêm loại mới, factory vẫn cần được cập nhật.
-- Singleton dự kiến bảo đảm các lần truy cập cấu hình dùng cùng một đối tượng; trạng thái dùng chung có thể khiến kiểm thử khó cô lập.
-- Facade dự kiến gom nhiều lệnh thiết bị thành chế độ. Factory tạo đối tượng, còn Facade phối hợp sử dụng đối tượng.
-- Nếu bỏ Facade, client phải tự gọi các thao tác riêng của thiết bị theo đúng thứ tự.
+Chạy kiểm tra:
 
-## Giới hạn
+```bash
+python -m unittest discover -s tests -v
+```
 
-Code mới mô phỏng trạng thái trong bộ nhớ, chưa kết nối thiết bị thật. Singleton và Facade mới có trong phần thiết kế, chưa được cài đặt.
+## Thiết kế
+
+- `IDevice` định nghĩa thao tác bật và tắt thiết bị.
+- `ILockable` bổ sung thao tác khóa và mở khóa cho cửa.
+- `DeviceFactory` chọn lớp thiết bị dựa trên loại đầu vào.
+- `HomeConfiguration` giữ tên nhà và mức sáng ban đêm dùng chung.
+- UML lớp và phân tích thiết kế nằm trong [`docs/analysis-and-design.md`](docs/analysis-and-design.md).
+
+Factory giúp phần chạy chương trình không cần tự chọn constructor của từng thiết bị. Singleton giúp các phần của ứng dụng dùng chung cấu hình. Facade được dùng trong sơ đồ để thể hiện cách gom nhiều thao tác thành các chế độ như Đi làm và Đi ngủ.
+
+Mã nguồn: [GitHub - Week-10](https://github.com/dangdoaimo2006-cloud/Week-10).

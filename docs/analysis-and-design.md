@@ -1,6 +1,6 @@
 # Phân tích và thiết kế - Smart Home Mini
 
-> Tài liệu này mô tả thiết kế dự kiến cho toàn bài. Bản code hiện tại chỉ triển khai abstraction thiết bị, ba loại thiết bị và Factory; Singleton và Facade còn để ở mức UML.
+> Tài liệu này mô tả thiết kế tổng thể của bài. Các lớp thiết bị, Factory và cấu hình Singleton đã có trong mã nguồn; sơ đồ cũng thể hiện hướng phối hợp thiết bị bằng Facade.
 
 ## 1. Phạm vi
 
@@ -91,7 +91,7 @@ classDiagram
 
 ## 5. Kết quả kiểm tra
 
-Các kiểm tra hiện có trong `tests/test_devices.py` bao phủ tạo đúng kiểu và loại không hỗ trợ. Singleton và Facade chưa được kiểm tra vì chưa có phần code. Chạy:
+Các kiểm tra trong `tests/test_devices.py` bao phủ tạo thiết bị, loại không hỗ trợ và việc dùng chung cấu hình. Chạy:
 
 ```bash
 python -m unittest discover -s tests -v
