@@ -1,6 +1,6 @@
 # Phân tích và thiết kế - Smart Home Mini
 
-> Tài liệu này mô tả thiết kế tổng thể của bài. Các lớp thiết bị, Factory và cấu hình Singleton đã có trong mã nguồn; sơ đồ cũng thể hiện hướng phối hợp thiết bị bằng Facade.
+> Tài liệu này mô tả thiết kế và cách các lớp thiết bị, Factory, Singleton và Facade phối hợp với nhau.
 
 ## 1. Phạm vi
 
@@ -91,7 +91,7 @@ classDiagram
 
 ## 5. Kết quả kiểm tra
 
-Các kiểm tra trong `tests/test_devices.py` bao phủ tạo thiết bị, loại không hỗ trợ và việc dùng chung cấu hình. Chạy:
+Các kiểm tra trong `tests/test_devices.py` bao phủ Factory, Singleton, chế độ Đi làm và chế độ Đi ngủ. Chạy:
 
 ```bash
 python -m unittest discover -s tests -v

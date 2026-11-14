@@ -1,10 +1,18 @@
+from threading import Lock
+
+
 class HomeConfiguration:
     _instance = None
+    _lock = Lock()
 
     def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
+        with cls._lock:
+            if cls._instance is None:
+                cls._instance = super().__new__(cls)
+            return cls._instance
+
+    def __init_subclass__(cls):
+        raise TypeError("HomeConfiguration cannot be subclassed")
 
     def __init__(self):
         if not hasattr(self, "home_name"):

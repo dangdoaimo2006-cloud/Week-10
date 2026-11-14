@@ -1,7 +1,11 @@
 # Nguyễn Hải Đăng - MSSV: 202418863
 
+from typing import cast
+
 from src.device_factory import DeviceFactory
+from src.devices import ILockable
 from src.home_configuration import HomeConfiguration
+from src.smart_home_facade import SmartHomeFacade
 
 
 def main() -> None:
@@ -14,9 +18,12 @@ def main() -> None:
     print(f"Same configuration: {config1 is config2}")
     print(f"Night light level: {config1.night_light_level}%")
 
-    light.turn_on()
-    fan.turn_off()
-    door.lock()
+    home = SmartHomeFacade(light, fan, cast(ILockable, door), config1)
+
+    print("\n--- Go to work ---")
+    home.go_to_work()
+    print("\n--- Go to sleep ---")
+    home.go_to_sleep()
 
 
 if __name__ == "__main__":
